@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Manager</title>
+</head>
+<body>
+  <h2>Tasks</h2>
+  <ul id="taskList"></ul>
+  <script>
+    fetch("http://127.0.0.1:8000/api/tasks/", {
+      headers: {
+        Authorization: "Bearer YOUR_ACCESS_TOKEN"
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById('taskList');
+      data.forEach(task => {
+        let item = document.createElement('li');
+        item.textContent = `${task.title} - ${task.status} - ${task.category}`;
+        list.appendChild(item);
+      });
+    });
+  </script>
+</body>
+</html>
